@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Said Abdul Aziz — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+ 
+<script src=const supabaseUrl = https://gsprdnjgbjbhbrrgzemg.supabase.co;
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdzcHJkbmpnYmpiaGJycmd6ZW1nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1NzU2NTEsImV4cCI6MjA5MDE1MTY1MX0.qTaygxRmIzWszhiV3Nhe-NpInLeQTM4bd_OGqA-XRYw";
+
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#04080f;--bg2:#08111e;--bg3:#0c1929;
+  --accent:#00d4ff;--accent2:#7b5cff;--gold:#f5c842;
+  --green:#00e5a0;--red:#ff4f6a;--orange:#ff8c42;
+  --text:#dff0f7;--text2:#6e9ab5;--text3:#334f68;
+  --card:#081525;--border:#122338;--border2:#1a3350;
+  font-family:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+.syne{font-family:'Syne',sans-serif}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* ===== NAV ===== */
+nav{position:sticky;top:0;z-index:200;background:rgba(4,8,15,0.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;height:60px;gap:1rem}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem;color:var(--accent);flex-shrink:0}
+.nav-links{display:flex;gap:2px;flex:1;justify-content:center;flex-wrap:wrap}
+.nav-links button{background:none;border:none;color:var(--text2);font-size:0.8rem;padding:0.35rem 0.65rem;border-radius:6px;cursor:pointer;transition:all 0.18s;font-family:'DM Sans',sans-serif;white-space:nowrap}
+.nav-links button:hover,.nav-links button.active{color:var(--accent);background:rgba(0,212,255,0.08)}
+.nav-right{display:flex;gap:0.5rem;flex-shrink:0}
+.btn-sm{padding:0.3rem 0.8rem;border-radius:7px;font-size:0.78rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.18s;border:none}
+.btn-edit-nav{background:rgba(123,92,255,0.15);border:1px solid rgba(123,92,255,0.35);color:#b09fff}
+.btn-edit-nav:hover{background:rgba(123,92,255,0.28)}
+.btn-export-nav{background:var(--accent);color:#000;font-weight:600}
+.btn-export-nav:hover{background:#00b8e0}
+
+/* ===== SECTIONS ===== */
+.section{display:none;padding:1.75rem 1.5rem;max-width:980px;margin:0 auto;animation:fadeIn 0.3s ease}
+.section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== SECTION TITLE ===== */
+.sec-title{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:700;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.65rem}
+.sec-title::before{content:'';width:3px;height:1.3rem;background:linear-gradient(180deg,var(--accent),var(--accent2));border-radius:2px;flex-shrink:0}
+
+/* ===== HERO ===== */
+.hero-wrap{display:grid;grid-template-columns:1fr 190px;gap:2.5rem;align-items:start;padding:2.5rem 0 1.5rem}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(0,212,255,0.07);border:1px solid rgba(0,212,255,0.18);border-radius:100px;padding:0.3rem 1rem;font-size:0.75rem;color:var(--accent);margin-bottom:1.25rem}
+.hero-badge-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.hero-name{font-family:'Syne',sans-serif;font-size:2.8rem;font-weight:800;line-height:1.05;margin-bottom:0.5rem}
+.hero-name em{color:var(--accent);font-style:normal}
+.hero-role{font-size:0.9rem;color:var(--text2);margin-bottom:1.25rem}
+.hero-bio-txt{font-size:0.88rem;color:var(--text2);line-height:1.8;max-width:500px;margin-bottom:1.75rem}
+.hero-kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;margin-bottom:1.75rem}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:0.85rem;text-align:center}
+.kpi-n{font-family:'Syne',sans-serif;font-size:1.55rem;font-weight:800;color:var(--accent)}
+.kpi-l{font-size:0.68rem;color:var(--text3);margin-top:1px}
+.hero-ctcs{display:flex;gap:0.6rem;flex-wrap:wrap}
+.ctc-btn{display:inline-flex;align-items:center;gap:0.45rem;padding:0.45rem 0.9rem;border-radius:9px;font-size:0.8rem;text-decoration:none;transition:all 0.18s;cursor:pointer;border:none;font-family:'DM Sans',sans-serif}
+.ctc-wa{background:rgba(0,229,160,0.1);border:1px solid rgba(0,229,160,0.25);color:var(--green)}
+.ctc-wa:hover{background:rgba(0,229,160,0.2)}
+.ctc-ig{background:rgba(245,200,66,0.08);border:1px solid rgba(245,200,66,0.22);color:var(--gold)}
+.ctc-ig:hover{background:rgba(245,200,66,0.15)}
+.ctc-li{background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.22);color:var(--accent)}
+.ctc-li:hover{background:rgba(0,212,255,0.16)}
+
+/* PHOTO FRAME */
+.photo-frame{width:180px;height:220px;border-radius:18px;overflow:hidden;border:2px solid var(--border2);position:relative;flex-shrink:0;cursor:pointer;transition:border-color 0.2s}
+.photo-frame:hover{border-color:var(--accent)}
+.photo-frame img{width:100%;height:100%;object-fit:cover;object-position:top}
+.photo-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--card);gap:0.5rem}
+.photo-overlay{position:absolute;inset:0;background:rgba(0,212,255,0.12);opacity:0;transition:opacity 0.2s;display:flex;align-items:center;justify-content:center;font-size:0.8rem;color:var(--accent)}
+.photo-frame:hover .photo-overlay{opacity:1}
+.photo-badge-label{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(0,212,255,0.88);color:#000;font-size:0.65rem;font-weight:700;padding:0.18rem 0.6rem;border-radius:100px;white-space:nowrap}
+
+/* ===== SERVICES ===== */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.85rem}
+.svc-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.15rem;cursor:pointer;transition:all 0.2s;text-decoration:none;display:block}
+.svc-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.svc-icon{font-size:1.4rem;margin-bottom:0.7rem}
+.svc-title{font-size:0.88rem;font-weight:500;margin-bottom:0.35rem}
+.svc-desc{font-size:0.76rem;color:var(--text2);line-height:1.55}
+.svc-cta{font-size:0.72rem;color:var(--accent);margin-top:0.65rem;display:flex;align-items:center;gap:0.3rem}
+
+/* ===== SKILLS ===== */
+.tab-pills{display:flex;gap:0.25rem;margin-bottom:1.25rem;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:0.3rem}
+.tab-pill{flex:1;padding:0.45rem;border:none;background:none;border-radius:7px;color:var(--text2);font-size:0.8rem;cursor:pointer;transition:all 0.18s;font-family:'DM Sans',sans-serif}
+.tab-pill.active{background:var(--bg3);color:var(--accent);border:1px solid rgba(0,212,255,0.18)}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0.85rem}
+.skill-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.1rem;position:relative}
+.skill-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.65rem}
+.skill-name{font-size:0.86rem;font-weight:500}
+.skill-pct{font-family:'Syne',sans-serif;font-size:0.84rem;color:var(--accent);font-weight:700}
+.skill-track{height:5px;background:rgba(255,255,255,0.05);border-radius:100px;overflow:hidden}
+.skill-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--accent2),var(--accent));transition:width 0.5s ease}
+.skill-del{position:absolute;top:0.5rem;right:0.5rem;background:none;border:none;color:var(--text3);cursor:pointer;font-size:0.75rem;padding:0.2rem 0.4rem;border-radius:4px;transition:color 0.15s}
+.skill-del:hover{color:var(--red)}
+
+/* ===== PROJECTS ===== */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1rem}
+.proj-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all 0.2s;position:relative}
+.proj-card:hover{border-color:rgba(0,212,255,0.3);transform:translateY(-2px)}
+.proj-media{height:155px;background:linear-gradient(135deg,var(--bg2),var(--bg3));display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;cursor:pointer}
+.proj-media img,.proj-media video{width:100%;height:100%;object-fit:cover}
+.proj-media-placeholder{display:flex;flex-direction:column;align-items:center;gap:0.5rem;color:var(--text3);font-size:0.78rem}
+.proj-media-overlay{position:absolute;inset:0;background:rgba(0,212,255,0.1);opacity:0;transition:opacity 0.2s;display:flex;align-items:center;justify-content:center;font-size:0.8rem;color:var(--accent)}
+.proj-media:hover .proj-media-overlay{opacity:1}
+.proj-body{padding:1rem}
+.proj-tags{display:flex;gap:0.35rem;flex-wrap:wrap;margin-bottom:0.55rem}
+.proj-tag{font-size:0.65rem;padding:0.12rem 0.45rem;border-radius:4px;background:rgba(123,92,255,0.1);color:#a58fff;border:1px solid rgba(123,92,255,0.18)}
+.proj-title{font-size:0.9rem;font-weight:500;margin-bottom:0.35rem}
+.proj-desc{font-size:0.78rem;color:var(--text2);line-height:1.6;margin-bottom:0.65rem}
+.proj-link{display:inline-flex;align-items:center;gap:0.35rem;font-size:0.76rem;color:var(--accent);text-decoration:none;border:1px solid rgba(0,212,255,0.2);padding:0.25rem 0.65rem;border-radius:6px;transition:all 0.18s}
+.proj-link:hover{background:rgba(0,212,255,0.1)}
+.proj-del{position:absolute;top:0.5rem;right:0.5rem;background:rgba(0,0,0,0.5);border:none;color:var(--text3);cursor:pointer;font-size:0.75rem;padding:0.2rem 0.5rem;border-radius:6px;transition:color 0.15s}
+.proj-del:hover{color:var(--red)}
+
+/* ===== EDUCATION ===== */
+.edu-line{position:relative;padding-left:2rem}
+.edu-line::before{content:'';position:absolute;left:5px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent),var(--accent2),transparent)}
+.edu-item{position:relative;margin-bottom:1.5rem}
+.edu-dot{position:absolute;left:-2rem;top:4px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.edu-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:1.1rem;transition:border-color 0.2s;position:relative}
+.edu-card:hover{border-color:rgba(0,212,255,0.25)}
+.edu-lvl{font-size:0.68rem;color:var(--accent);font-weight:600;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:0.25rem}
+.edu-name{font-size:0.92rem;font-weight:500;margin-bottom:0.2rem}
+.edu-major{font-size:0.8rem;color:var(--text2);margin-bottom:0.15rem}
+.edu-loc{font-size:0.74rem;color:var(--text3)}
+.edu-year{position:absolute;top:0.75rem;right:0.75rem;font-size:0.68rem;padding:0.15rem 0.55rem;border-radius:100px;background:rgba(0,212,255,0.07);color:var(--accent);border:1px solid rgba(0,212,255,0.15)}
+.edu-del{position:absolute;bottom:0.5rem;right:0.5rem;background:none;border:none;color:var(--text3);cursor:pointer;font-size:0.72rem;padding:0.2rem 0.4rem;border-radius:4px;transition:color 0.15s}
+.edu-del:hover{color:var(--red)}
+
+/* ===== PROGRESS ===== */
+.prog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:0.9rem}
+.prog-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.15rem;position:relative}
+.prog-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.85rem}
+.prog-left .prog-title{font-size:0.88rem;font-weight:500}
+.prog-left .prog-sub{font-size:0.73rem;color:var(--text3);margin-top:0.15rem}
+.prog-status{font-size:0.68rem;padding:0.18rem 0.55rem;border-radius:100px}
+.st-ongoing{background:rgba(0,229,160,0.1);color:var(--green);border:1px solid rgba(0,229,160,0.22)}
+.st-plan{background:rgba(245,200,66,0.08);color:var(--gold);border:1px solid rgba(245,200,66,0.22)}
+.st-done{background:rgba(0,212,255,0.08);color:var(--accent);border:1px solid rgba(0,212,255,0.18)}
+.prog-pct-big{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:800;color:var(--accent);line-height:1;margin-bottom:0.5rem}
+.prog-track{height:7px;background:rgba(255,255,255,0.05);border-radius:100px;overflow:hidden;margin-bottom:0.65rem}
+.prog-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--accent2),var(--accent));transition:width 0.4s ease}
+.prog-slider-row{display:flex;align-items:center;gap:0.5rem}
+.prog-slider-row input[type=range]{flex:1;accent-color:var(--accent);cursor:pointer}
+.prog-slider-val{font-size:0.76rem;color:var(--text2);min-width:32px;text-align:right}
+.prog-link{display:inline-flex;align-items:center;gap:0.3rem;font-size:0.73rem;color:var(--accent);text-decoration:none;border:1px solid rgba(0,212,255,0.18);padding:0.22rem 0.6rem;border-radius:6px;margin-top:0.6rem;transition:all 0.18s}
+.prog-link:hover{background:rgba(0,212,255,0.1)}
+.prog-media-thumb{margin-top:0.65rem;height:80px;border-radius:8px;overflow:hidden;cursor:pointer;background:var(--bg2);display:flex;align-items:center;justify-content:center;border:1px dashed var(--border2);position:relative}
+.prog-media-thumb img,.prog-media-thumb video{width:100%;height:100%;object-fit:cover}
+.prog-del{position:absolute;top:0.5rem;right:0.5rem;background:none;border:none;color:var(--text3);cursor:pointer;font-size:0.72rem;padding:0.2rem 0.4rem;border-radius:4px;transition:color 0.15s}
+.prog-del:hover{color:var(--red)}
+
+/* ===== ANALYTICS ===== */
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0.75rem;margin-bottom:1.5rem}
+.akpi{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:0.9rem;text-align:center}
+.akpi-n{font-family:'Syne',sans-serif;font-size:1.7rem;font-weight:800;margin-bottom:0.15rem}
+.akpi-l{font-size:0.68rem;color:var(--text3)}
+.chart-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.35rem;margin-bottom:1.25rem}
+.chart-box-title{font-size:0.82rem;color:var(--text2);margin-bottom:1rem;font-weight:500}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+
+/* ===== ADD BUTTON ===== */
+.add-btn{display:inline-flex;align-items:center;gap:0.45rem;background:rgba(0,212,255,0.06);border:1px dashed rgba(0,212,255,0.25);color:var(--accent);padding:0.55rem 1.1rem;border-radius:9px;font-size:0.8rem;cursor:pointer;margin-top:0.85rem;transition:all 0.18s;font-family:'DM Sans',sans-serif}
+.add-btn:hover{background:rgba(0,212,255,0.12)}
+
+/* ===== DIVIDER ===== */
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);margin:1.75rem 0}
+
+/* ===== MODALS ===== */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:500;align-items:center;justify-content:center;padding:1rem}
+.overlay.open{display:flex}
+.modal{background:#08111e;border:1px solid var(--border2);border-radius:18px;padding:1.75rem;width:100%;max-width:540px;max-height:88vh;overflow-y:auto}
+.modal h2{font-family:'Syne',sans-serif;font-size:1.1rem;margin-bottom:1.4rem;color:var(--text)}
+.fg{margin-bottom:0.9rem}
+.fg label{display:block;font-size:0.75rem;color:var(--text2);margin-bottom:0.35rem}
+.fg input,.fg textarea,.fg select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:0.55rem 0.75rem;color:var(--text);font-size:0.84rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.15s}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--accent)}
+.fg textarea{resize:vertical;min-height:75px}
+.fg-range{display:flex;align-items:center;gap:0.6rem}
+.fg-range input[type=range]{flex:1;accent-color:var(--accent)}
+.fg-range span{font-size:0.8rem;color:var(--accent);font-weight:600;min-width:36px}
+.modal-row{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+.modal-acts{display:flex;gap:0.6rem;margin-top:1.35rem;justify-content:flex-end}
+.btn-cancel{background:none;border:1px solid var(--border);color:var(--text2);padding:0.45rem 1.1rem;border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.84rem}
+.btn-cancel:hover{background:rgba(255,255,255,0.04)}
+.btn-save{background:var(--accent);border:none;color:#000;padding:0.45rem 1.25rem;border-radius:8px;cursor:pointer;font-weight:700;font-family:'DM Sans',sans-serif;font-size:0.84rem;transition:background 0.18s}
+.btn-save:hover{background:#00b8e0}
+.media-upload-area{border:1px dashed var(--border2);border-radius:10px;padding:1.25rem;text-align:center;cursor:pointer;transition:all 0.18s;position:relative}
+.media-upload-area:hover{border-color:var(--accent);background:rgba(0,212,255,0.04)}
+.media-upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.media-preview{margin-top:0.65rem;border-radius:8px;overflow:hidden;max-height:120px;display:flex;align-items:center;justify-content:center;background:var(--bg)}
+.media-preview img,.media-preview video{max-width:100%;max-height:120px;object-fit:contain}
+
+/* NOTIFICATION */
+.notif{position:fixed;top:72px;right:1.25rem;padding:0.6rem 1.1rem;border-radius:9px;font-size:0.8rem;z-index:600;opacity:0;transform:translateY(-8px);transition:all 0.28s;pointer-events:none}
+.notif.success{background:#082018;border:1px solid var(--green);color:var(--green)}
+.notif.show{opacity:1;transform:translateY(0)}
+
+/* PERCENT BAR LABEL */
+.pbl{font-size:0.68rem;color:var(--text3);margin-top:0.5rem;text-align:right}
+
+/* SETTINGS TAB */
+.settings-section{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.25rem;margin-bottom:1rem}
+.settings-section h3{font-size:0.9rem;font-weight:500;margin-bottom:1rem;color:var(--accent)}
+.settings-row{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid var(--border)}
+.settings-row:last-child{border-bottom:none}
+.settings-row label{font-size:0.83rem;color:var(--text2)}
+.settings-row input,.settings-row select{background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:0.4rem 0.65rem;color:var(--text);font-size:0.82rem;font-family:'DM Sans',sans-serif;outline:none;width:200px}
+.settings-row input:focus,.settings-row select:focus{border-color:var(--accent)}
+.btn-settings-save{background:var(--accent);border:none;color:#000;padding:0.5rem 1.5rem;border-radius:8px;cursor:pointer;font-weight:700;font-family:'DM Sans',sans-serif;margin-top:1rem}
+
+/* OVERALL SCORE RING */
+.score-ring-wrap{display:flex;flex-direction:column;align-items:center;gap:0.5rem}
+.score-ring-wrap p{font-size:0.75rem;color:var(--text3)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo syne" id="nav-logo-name">SAA</div>
+  <div class="nav-links">
+    <button class="active" onclick="goSec('home')">Home</button>
+    <button onclick="goSec('skills')">Skills</button>
+    <button onclick="goSec('projects')">Projects</button>
+    <button onclick="goSec('education')">Education</button>
+    <button onclick="goSec('progress')">Progress</button>
+    <button onclick="goSec('analytics')">Analytics</button>
+    <button onclick="goSec('settings')">⚙ Settings</button>
+  </div>
+  <div class="nav-right">
+    <button class="btn-sm btn-edit-nav" onclick="openExport()">⬇ Export</button>
+  </div>
+</nav>
+
+<!-- ===== HOME ===== -->
+<div id="sec-home" class="section active">
+  <div id="sec-experience" class="section">
+  <div class="sec-title">Experience & Achievement</div>
+
+  <div class="card">
+    <div style="font-weight:500">Freelance UI Designer</div>
+    <div style="font-size:0.8rem;color:var(--text2)">
+     Designing UI applications and websites for personal projects and small clients.
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font-weight:500">Self Learning Web Development</div>
+    <div style="font-size:0.8rem;color:var(--text2)">
+      Learn HTML, CSS, and JavaScript independently and build several projects.
+    </div>
+  </div>
+<button onclick="goSec('experience')">Experience</button>
+</div>
+  <div class="hero-wrap">
+    <div>
+      <div class="hero-badge">
+  <span class="hero-badge-dot"></span>
+  <span>Open to Opportunities · Available for Remote Work</span>
+</div>
+      <h1 class="hero-name syne" id="h-name">Said Abdul <em>Aziz</em></h1>
+      <p class="hero-role" id="h-role">Web &amp; App Designer · UI/UX Enthusiast · Aspiring Software Engineer</p>
+      <p class="hero-bio-txt" id="h-bio">Aspiring software engineer with a strong passion for building modern, scalable, and impactful digital solutions. Focused on continuous learning and creating technology that makes a global impact.</p>
+      <div class="hero-kpi">
+        <div class="kpi"><div class="kpi-n" id="h-kpi-proj">0</div><div class="kpi-l">Projects</div></div>
+        <div class="kpi"><div class="kpi-n" id="h-kpi-exp">0</div><div class="kpi-l">Years Exp</div></div>
+        <div class="kpi"><div class="kpi-n" id="h-kpi-cli">0</div><div class="kpi-l">Clients</div></div>
+      </div>
+      <div class="hero-ctcs">
+        <a class="ctc-btn ctc-wa" id="wa-link" href="https://wa.me/6285819228648" target="_blank">📱 WhatsApp</a>
+        <a class="ctc-btn ctc-ig" id="ig-link" href="https://www.instagram.com/saidazizv/" target="_blank">📸 Instagram</a>
+        <a class="ctc-btn ctc-li" id="li-link" href="https://www.linkedin.com/in/sa-id-6037033b8" target="_blank">💼 LinkedIn</a>
+        <a class="ctc-btn ctc-li" href="cv.pdf" download>📄 Download CV</a>
+    </div>
+    <div>
+      <div class="photo-frame" onclick="triggerPhotoUpload()" title="Klik untuk ganti foto">
+        <img id="hero-photo" src="" alt="Sa'id Abdul Aziz" style="display:none">
+        <div class="photo-placeholder" id="photo-placeholder">
+          <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent)">SAA</div>
+          <div style="font-size:0.7rem;color:var(--text3)">Klik untuk upload foto</div>
+        </div>
+        <div class="photo-overlay">📷 Ganti Foto</div>
+        <div class="photo-badge-label">Said Abdul Aziz</div>
+      </div>
+      <input type="file" id="photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event)">
+    </div>
+  </div> 
+  <div class="divider"></div>
+
+<div class="sec-title">About Me</div>
+<p style="font-size:0.85rem;color:var(--text2);line-height:1.8;max-width:700px">
+I am an aspiring software engineer with a focus on modern web development and UI/UX design.
+I enjoy building digital solutions that are not only visually appealing but also powerful in functionality.
+I am currently developing my skills to meet international standards and be ready to work globally.
+</p>
+
+  <div class="divider"></div>
+  <div class="sec-title">Layanan — Hubungi via WhatsApp</div>
+  <div class="services-grid" id="services-grid">
+    <a class="svc-card" href="https://wa.me/6285819228648?text=Halo%20Said%2C%20saya%20tertarik%20dengan%20layanan%20UI%2FUX%20Design" target="_blank" style="border-left:3px solid var(--accent)">
+      <div class="svc-icon">🎨</div><div class="svc-title">UI/UX Design</div>
+      <div class="svc-desc">Desain antarmuka modern yang intuitif dan berpusat pada pengguna</div>
+      <div class="svc-cta">Hubungi →</div>
+    </a>
+    <a class="svc-card" href="https://wa.me/6285819228648?text=Halo%20Said%2C%20saya%20tertarik%20dengan%20layanan%20Web%20Development" target="_blank" style="border-left:3px solid var(--accent2)">
+      <div class="svc-icon">💻</div><div class="svc-title">Web Development</div>
+      <div class="svc-desc">Membangun website responsif, cepat dan berperforma tinggi</div>
+      <div class="svc-cta">Hubungi →</div>
+    </a>
+    <a class="svc-card" href="https://wa.me/6285819228648?text=Halo%20Said%2C%20saya%20tertarik%20dengan%20layanan%20App%20Design" target="_blank" style="border-left:3px solid var(--green)">
+      <div class="svc-icon">📱</div><div class="svc-title">App Design</div>
+      <div class="svc-desc">Desain aplikasi mobile elegan dan user-friendly untuk iOS &amp; Android</div>
+      <div class="svc-cta">Hubungi →</div>
+    </a>
+    <a class="svc-card" href="https://wa.me/6285819228648?text=Halo%20Said%2C%20saya%20tertarik%20dengan%20layanan%20Brand%20Identity" target="_blank" style="border-left:3px solid var(--gold)">
+      <div class="svc-icon">🔥</div><div class="svc-title">Brand Identity</div>
+      <div class="svc-desc">Membangun identitas visual yang kuat, berkesan dan profesional</div>
+      <div class="svc-cta">Hubungi →</div>
+    </a>
+  </div>
+</div>
+
+<!-- ===== SKILLS ===== -->
+<div id="sec-skills" class="section">
+  <div class="sec-title">Skills Saya</div>
+  <div class="tab-pills">
+    <button class="tab-pill active" onclick="switchPill('design',this)">Design</button>
+    <button class="tab-pill" onclick="switchPill('tech',this)">Tech</button>
+    <button class="tab-pill" onclick="switchPill('soft',this)">Soft Skills</button>
+  </div>
+  <div id="pane-design" class="tab-pane active"><div class="skills-grid" id="sg-design"></div></div>
+  <div id="pane-tech" class="tab-pane"><div class="skills-grid" id="sg-tech"></div></div>
+  <div id="pane-soft" class="tab-pane"><div class="skills-grid" id="sg-soft"></div></div>
+  <button class="add-btn" onclick="openM('mAddSkill')">+ Tambah Skill</button>
+</div>
+
+<!-- ===== PROJECTS ===== -->
+<div id="sec-projects" class="section">
+  <div class="sec-title">Portfolio Projects</div>
+  <div class="proj-grid" id="proj-grid"></div>
+  <button class="add-btn" onclick="openM('mAddProj')">+ Tambah Project</button>
+</div>
+
+<!-- ===== EDUCATION ===== -->
+<div id="sec-education" class="section">
+  <div class="sec-title">Riwayat Pendidikan</div>
+  <div class="edu-line" id="edu-list"></div>
+  <button class="add-btn" onclick="openM('mAddEdu')">+ Tambah Pendidikan</button>
+</div>
+
+<!-- ===== PROGRESS ===== -->
+<div id="sec-progress" class="section">
+  <div class="sec-title">Progress &amp; Goals</div>
+  <p style="font-size:0.82rem;color:var(--text2);margin-bottom:1.25rem">Perbarui progress dengan slider. Grafik Analytics otomatis terupdate. Persentase keseluruhan bertambah setiap ada progress baru.</p>
+  <div class="prog-grid" id="prog-grid"></div>
+  <button class="add-btn" onclick="openM('mAddProg')">+ Tambah Progress</button>
+</div>
+
+<!-- ===== ANALYTICS ===== -->
+<div id="sec-analytics" class="section">
+  <div class="sec-title">Analytics &amp; Insight</div>
+  <div class="kpi-row">
+    <div class="akpi"><div class="akpi-n" id="an-skills" style="color:var(--accent)">0</div><div class="akpi-l">Total Skills</div></div>
+    <div class="akpi"><div class="akpi-n" id="an-projs" style="color:var(--accent2)">0</div><div class="akpi-l">Projects</div></div>
+    <div class="akpi"><div class="akpi-n" id="an-avgsk" style="color:var(--green)">0%</div><div class="akpi-l">Avg Skill Level</div></div>
+    <div class="akpi"><div class="akpi-n" id="an-avgpr" style="color:var(--gold)">0%</div><div class="akpi-l">Avg Progress</div></div>
+  </div>
+  <div class="chart-grid">
+    <div class="chart-box">
+      <div class="chart-box-title">Distribusi Kategori Skill</div>
+      <div style="position:relative;height:200px"><canvas id="cCat"></canvas></div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-box-title">Overall Score</div>
+      <div style="position:relative;height:200px"><canvas id="cScore"></canvas></div>
+    </div>
+  </div>
+  <div class="chart-box">
+    <div class="chart-box-title">Level per Skill</div>
+    <div style="position:relative;" id="cSkillWrap"><canvas id="cSkill"></canvas></div>
+  </div>
+  <div class="chart-box">
+    <div class="chart-box-title">Progress Goals (%)</div>
+    <div style="position:relative;height:240px"><canvas id="cProg"></canvas></div>
+  </div>
+  <div class="chart-grid">
+    <div class="chart-box">
+      <div class="chart-box-title">Status Progress</div>
+      <div style="position:relative;height:200px"><canvas id="cStatus"></canvas></div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-box-title">Skill Radar</div>
+      <div style="position:relative;height:200px"><canvas id="cRadar"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SETTINGS ===== -->
+<div id="sec-settings" class="section">
+  <div class="sec-title">Pengaturan Portfolio</div>
+  <div class="settings-section">
+    <h3>Identitas</h3>
+    <div class="settings-row"><label>Nama Lengkap</label><input type="text" id="set-name" value="Said Abdul Aziz"></div>
+    <div class="settings-row"><label>Role / Jabatan</label><input type="text" id="set-role" value="Web & App Designer · UI/UX Enthusiast · Aspiring Software Engineer"></div>
+    <div class="settings-row"><label>Badge Atas</label><input type="text" id="set-badge" value="Open to Opportunities"></div>
+    <div class="settings-row"><label>Bio Singkat</label><input type="text" id="set-bio" value="Aspiring software engineer with a strong passion for building modern, scalable, and impactful digital solutions."></div>
+  </div>
+  <div class="settings-section">
+    <h3>Kontak</h3>
+    <div class="settings-row"><label>WhatsApp (no. HP)</label><input type="text" id="set-wa" value="6285819228648"></div>
+    <div class="settings-row"><label>Instagram URL</label><input type="text" id="set-ig" value="https://www.instagram.com/saidazizv/"></div>
+    <div class="settings-row"><label>LinkedIn URL</label><input type="text" id="set-li" value="https://www.linkedin.com/in/sa-id-6037033b8"></div>
+  </div>
+  <div class="settings-section">
+    <h3>Statistik Hero</h3>
+    <div class="settings-row"><label>Total Projects</label><input type="number" id="set-proj" min="0" value="0"></div>
+    <div class="settings-row"><label>Years Experience</label><input type="number" id="set-exp" min="0" value="0"></div>
+    <div class="settings-row"><label>Total Clients</label><input type="number" id="set-cli" min="0" value="0"></div>
+  </div>
+  <button class="btn-settings-save" onclick="saveSettings()">💾 Simpan Semua Pengaturan</button>
+</div>
+
+<!-- ===== MODALS ===== -->
+<!-- ADD SKILL -->
+<div class="overlay" id="mAddSkill">
+  <div class="modal">
+    <h2>Tambah Skill</h2>
+    <div class="fg"><label>Nama Skill</label><input type="text" id="ms-name" placeholder="cth: Figma"></div>
+    <div class="fg"><label>Level</label><div class="fg-range"><input type="range" id="ms-lv" min="0" max="100" value="70" oninput="document.getElementById('ms-lv-v').textContent=this.value+'%'"><span id="ms-lv-v">70%</span></div></div>
+    <div class="fg"><label>Kategori</label><select id="ms-cat"><option value="design">Design</option><option value="tech">Tech</option><option value="soft">Soft Skills</option></select></div>
+    <div class="modal-acts"><button class="btn-cancel" onclick="closeM('mAddSkill')">Batal</button><button class="btn-save" onclick="addSkill()">Tambah</button></div>
+  </div>
+</div>
+
+<!-- ADD PROJECT -->
+<div class="overlay" id="mAddProj">
+  <div class="modal">
+    <h2>Tambah Project</h2>
+    <div class="fg"><label>Judul</label><input type="text" id="mp-title" placeholder="cth: E-Commerce App"></div>
+    <div class="fg"><label>Deskripsi</label><textarea id="mp-desc" placeholder="Deskripsi singkat..."></textarea></div>
+    <div class="fg"><label>Tags (pisah koma)</label><input type="text" id="mp-tags" placeholder="cth: UI Design, Figma, React"></div>
+    <div class="fg"><label>Link Project (opsional)</label><input type="url" id="mp-link" placeholder="https://..."></div>
+    <div class="fg"><label>Foto / Video Preview (opsional)</label>
+      <div class="media-upload-area"><input type="file" id="mp-file" accept="image/*,video/*" onchange="previewMedia('mp-file','mp-prev')"><div style="font-size:0.8rem;color:var(--text3)">📁 Klik untuk pilih foto atau video</div></div>
+      <div class="media-preview" id="mp-prev" style="display:none"></div>
+    </div>
+    <div class="fg"><label>Emoji Icon</label><input type="text" id="mp-icon" value="🌐" placeholder="Emoji"></div>
+    <div class="modal-acts"><button class="btn-cancel" onclick="closeM('mAddProj')">Batal</button><button class="btn-save" onclick="addProject()">Tambah</button></div>
+  </div>
+</div>
+
+<!-- ADD EDU -->
+<div class="overlay" id="mAddEdu">
+  <div class="modal">
+    <h2>Tambah Pendidikan</h2>
+    <div class="fg"><label>Jenjang</label><select id="me-lv"><option>Taman Kanak-Kanak</option><option>Sekolah Dasar</option><option>SMP</option><option>SMA/SMK</option><option>D3</option><option>S1/D4</option><option>S2</option><option>S3</option></select></div>
+    <div class="fg"><label>Nama Sekolah / Kampus</label><input type="text" id="me-name"></div>
+    <div class="fg"><label>Jurusan / Program (opsional)</label><input type="text" id="me-major" placeholder="cth: Teknik Informatika"></div>
+    <div class="modal-row">
+      <div class="fg"><label>Lokasi</label><input type="text" id="me-loc" placeholder="cth: Jakarta"></div>
+      <div class="fg"><label>Tahun</label><input type="text" id="me-year" placeholder="cth: 2018–2022"></div>
+    </div>
+    <div class="modal-acts"><button class="btn-cancel" onclick="closeM('mAddEdu')">Batal</button><button class="btn-save" onclick="addEdu()">Tambah</button></div>
+  </div>
+</div>
+
+<!-- ADD PROGRESS -->
+<div class="overlay" id="mAddProg">
+  <div class="modal">
+    <h2>Tambah Progress / Goal</h2>
+    <div class="fg"><label>Judul</label><input type="text" id="mpr-title" placeholder="cth: Sertifikasi Google UX"></div>
+    <div class="fg"><label>Sub Keterangan</label><input type="text" id="mpr-sub" placeholder="cth: Coursera / Self-study"></div>
+    <div class="fg"><label>Status</label><select id="mpr-status"><option value="ongoing">Sedang Berjalan</option><option value="plan">Rencana</option><option value="done">Selesai</option></select></div>
+    <div class="fg"><label>Link (opsional)</label><input type="url" id="mpr-link" placeholder="https://..."></div>
+    <div class="fg"><label>Foto / Video (opsional)</label>
+      <div class="media-upload-area"><input type="file" id="mpr-file" accept="image/*,video/*" onchange="previewMedia('mpr-file','mpr-prev')"><div style="font-size:0.8rem;color:var(--text3)">📁 Klik untuk pilih foto atau video</div></div>
+      <div class="media-preview" id="mpr-prev" style="display:none"></div>
+    </div>
+    <div class="modal-acts"><button class="btn-cancel" onclick="closeM('mAddProg')">Batal</button><button class="btn-save" onclick="addProgress()">Tambah</button></div>
+  </div>
+</div>
+
+<!-- EXPORT -->
+<div class="overlay" id="mExport">
+  <div class="modal">
+    <h2>Export Portfolio</h2>
+    <div class="exp-opt" onclick="doExportHTML()"><div class="exp-ico" style="background:rgba(0,212,255,0.1);color:var(--accent)">🌐</div><div class="exp-info"><div class="t">HTML File</div><div class="d">Download halaman web lengkap siap upload / kirim</div></div></div>
+    <div class="exp-opt" onclick="doExportJSON()"><div class="exp-ico" style="background:rgba(0,229,160,0.1);color:var(--green)">📄</div><div class="exp-info"><div class="t">JSON Backup</div><div class="d">Backup semua data portfolio Anda</div></div></div>
+    <div class="modal-acts"><button class="btn-cancel" onclick="closeM('mExport')">Tutup</button></div>
+  </div>
+</div>
+
+<div class="notif success" id="notif">✓ Tersimpan!</div>
+
+<script>
+const SK='saa_pf_v3';
+let CI={cat:null,score:null,skill:null,prog:null,status:null,radar:null};
+
+const DS={
+  meta:{name:"Said Abdul Aziz",role:"Web & App Designer · UI/UX Enthusiast · Aspiring Software Engineer",badge:"Open to Opportunities",bio:"Aspiring software engineer with a strong passion for building modern, scalable, and impactful digital solutions. Focused on continuous learning and creating technology that makes a global impact.",proj:0,exp:0,cli:0,wa:"6285819228648",ig:"https://www.instagram.com/saidazizv/",li:"https://www.linkedin.com/in/sa-id-6037033b8",photo:""},
+  skills:{
+    design:[{n:"Figma",l:0},{n:"Adobe XD",l:0},{n:"UI/UX Design",l:0},{n:"Prototyping",l:0}],
+    tech:[{n:"HTML/CSS",l:0},{n:"JavaScript",l:0},{n:"React",l:0},{n:"Responsive Design",l:0}],
+    soft:[{n:"Problem Solving",l:0},{n:"Komunikasi",l:0},{n:"Teamwork",l:0},{n:"Kreativitas",l:0}]
+  },
+  projects:[
+    {t:"Portfolio Website",d:"Website portfolio pribadi dengan desain modern dan interaktif.",tags:["UI Design","HTML/CSS","Figma"],link:"",media:"",mtype:"",icon:"🌐"},
+    {t:"Mobile App UI",d:"Desain UI/UX aplikasi mobile e-commerce.",tags:["App Design","Figma","Prototype"],link:"",media:"",mtype:"",icon:"📱"},
+    {t:"Analytics Dashboard",d:"Dashboard monitoring bisnis real-time.",tags:["UI Design","Data Viz","Figma"],link:"",media:"",mtype:"",icon:"📊"}
+  ],
+  education:[
+    {lv:"Taman Kanak-Kanak",n:"TK Al-Hikmah Kemuning",m:"",loc:"Karanganyar, Jawa Tengah",y:""},
+    {lv:"Sekolah Dasar",n:"SDIT Al-Hikmah Kemuning",m:"",loc:"Karanganyar, Jawa Tengah",y:""},
+    {lv:"SMP",n:"SMP IT Daarul Fikri",m:"",loc:"Cikarang Barat, Bekasi, Jawa Barat",y:""},
+    {lv:"Perguruan Tinggi",n:"(Akan diisi)",m:"",loc:"",y:""}
+  ],
+  progress:[
+    {t:"UI/UX Design",s:"Personal Development",pct:0,status:"ongoing",link:"",media:"",mtype:""},
+    {t:"Web Development",s:"Frontend Stack",pct:0,status:"ongoing",link:"",media:"",mtype:""},
+    {t:"Portfolio Projects",s:"Target 10 Projects",pct:0,status:"plan",link:"",media:"",mtype:""},
+    {t:"Sertifikasi",s:"Google / Coursera",pct:0,status:"plan",link:"",media:"",mtype:""}
+  ]
+};
+
+let S=JSON.parse(JSON.stringify(DS));
+
+async function load(){
+  const { data, error } = await supabase
+    .from('portfolio')
+    .select('*')
+    .single();
+
+  if(data){
+    S = data.data;
+  }
+}
+async function save(){
+  await supabase
+    .from('portfolio')
+    .upsert({
+      id: 1,
+      data: S
+    });
+
+  toast();
+}
+function toast(){const n=document.getElementById('notif');n.classList.add('show');setTimeout(()=>n.classList.remove('show'),2000);}
+
+function goSec(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-links button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  const map={home:0,skills:1,projects:2,education:3,progress:4,analytics:5,settings:6};
+  if(map[id]!==undefined)document.querySelectorAll('.nav-links button')[map[id]].classList.add('active');
+  if(id==='analytics')setTimeout(drawCharts,80);
+  if(id==='settings')fillSettings();
+}
+
+function switchPill(t,el){
+  document.querySelectorAll('.tab-pill').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('pane-'+t).classList.add('active');
+}
+
+/* ===== RENDER ===== */
+function renderAll(){renderHero();renderSkills();renderProjects();renderEdu();renderProg();updateAnaKPI();}
+
+function renderHero(){
+  const m=S.meta;
+  document.getElementById('h-name').innerHTML=m.name.replace(/(\w+)$/,'<em>$1</em>');
+  document.getElementById('h-role').textContent=m.role;
+  document.getElementById('h-bio').textContent=m.bio;
+  document.getElementById('h-badge-txt').textContent=m.badge;
+  document.getElementById('h-kpi-proj').textContent=m.proj;
+  document.getElementById('h-kpi-exp').textContent=m.exp;
+  document.getElementById('h-kpi-cli').textContent=m.cli;
+  document.getElementById('wa-link').href='https://wa.me/'+m.wa;
+  document.getElementById('ig-link').href=m.ig;
+  document.getElementById('li-link').href=m.li;
+  if(m.photo){
+    document.getElementById('hero-photo').src=m.photo;
+    document.getElementById('hero-photo').style.display='block';
+    document.getElementById('photo-placeholder').style.display='none';
+  }else{
+    document.getElementById('hero-photo').style.display='none';
+    document.getElementById('photo-placeholder').style.display='flex';
+  }
+  // update services WA links
+  document.querySelectorAll('.svc-card').forEach(a=>{
+    const msg=encodeURIComponent('Halo Said, saya tertarik dengan layanan Anda');
+    a.href='https://wa.me/'+m.wa+'?text='+msg;
+  });
+}
+
+function renderSkills(){
+  ['design','tech','soft'].forEach(cat=>{
+    document.getElementById('sg-'+cat).innerHTML=S.skills[cat].map((sk,i)=>`
+      <div class="skill-item">
+        <button class="skill-del" onclick="delSkill('${cat}',${i})" title="Hapus">✕</button>
+        <div class="skill-top"><span class="skill-name">${sk.n}</span><span class="skill-pct">${sk.l}%</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:${sk.l}%"></div></div>
+      </div>`).join('');
+  });
+}
+
+function renderProjects(){
+  document.getElementById('proj-grid').innerHTML=S.projects.map((p,i)=>`
+    <div class="proj-card">
+      <button class="proj-del" onclick="delProj(${i})" title="Hapus">✕</button>
+      <div class="proj-media" onclick="openMediaFull('${p.media||''}','${p.mtype||''}')">
+        ${p.media?
+          (p.mtype==='video'?
+            `<video src="${p.media}" muted playsinline style="width:100%;height:100%;object-fit:cover"></video>`:
+            `<img src="${p.media}" alt="${p.t}" style="width:100%;height:100%;object-fit:cover">`):
+          `<div class="proj-media-placeholder"><span style="font-size:2.2rem">${p.icon||'🌐'}</span><span>Belum ada media</span></div>`}
+        <div class="proj-media-overlay">🔍 Lihat</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags">${p.tags.map(t=>`<span class="proj-tag">${t}</span>`).join('')}</div>
+        <div class="proj-title">${p.t}</div>
+        <div class="proj-desc">${p.d}</div>
+        ${p.link?`<a class="proj-link" href="${p.link}" target="_blank">🔗 Lihat Project</a>`:''}
+      </div>
+    </div>`).join('');
+}
+
+function renderEdu(){
+  document.getElementById('edu-list').innerHTML=S.education.map((e,i)=>`
+    <div class="edu-item">
+      <div class="edu-dot"></div>
+      <div class="edu-card">
+        ${e.y?`<span class="edu-year">${e.y}</span>`:''}
+        <button class="edu-del" onclick="delEdu(${i})" title="Hapus">✕</button>
+        <div class="edu-lvl">${e.lv}</div>
+        <div class="edu-name">${e.n}</div>
+        ${e.m?`<div class="edu-major">${e.m}</div>`:''}
+        ${e.loc?`<div class="edu-loc">📍 ${e.loc}</div>`:''}
+      </div>
+    </div>`).join('');
+}
+
+function renderProg(){
+  document.getElementById('prog-grid').innerHTML=S.progress.map((p,i)=>`
+    <div class="prog-card">
+      <button class="prog-del" onclick="delProg(${i})" title="Hapus">✕</button>
+      <div class="prog-head">
+        <div class="prog-left"><div class="prog-title">${p.t}</div><div class="prog-sub">${p.s}</div></div>
+        <span class="prog-status st-${p.status}">${p.status==='ongoing'?'Berjalan':p.status==='plan'?'Rencana':'Selesai'}</span>
+      </div>
+      <div class="prog-pct-big" id="pp-${i}">${p.pct}%</div>
+      <div class="prog-track"><div class="prog-fill" id="pf-${i}" style="width:${p.pct}%"></div></div>
+      <div class="prog-slider-row">
+        <input type="range" min="0" max="100" value="${p.pct}" step="1" oninput="updateProg(${i},this.value)">
+        <span class="prog-slider-val" id="pv-${i}">${p.pct}%</span>
+      </div>
+      ${p.link?`<a class="prog-link" href="${p.link}" target="_blank">🔗 Lihat Tautan</a>`:''}
+      ${p.media?`<div class="prog-media-thumb" onclick="openMediaFull('${p.media}','${p.mtype}')">
+        ${p.mtype==='video'?`<video src="${p.media}" muted playsinline style="width:100%;height:100%;object-fit:cover"></video>`:
+          `<img src="${p.media}" alt="${p.t}">`}
+      </div>`:''}
+    </div>`).join('');
+}
+
+function updateProg(i,v){
+  S.progress[i].pct=parseInt(v);
+  document.getElementById('pf-'+i).style.width=v+'%';
+  document.getElementById('pv-'+i).textContent=v+'%';
+  document.getElementById('pp-'+i).textContent=v+'%';
+  save();
+  updateAnaKPI();
+  // refresh charts if analytics open
+  const sec=document.getElementById('sec-analytics');
+  if(sec&&sec.classList.contains('active'))drawCharts();
+}
+
+function updateAnaKPI(){
+  const all=[...S.skills.design,...S.skills.tech,...S.skills.soft];
+  const ap=S.progress;
+  document.getElementById('an-skills').textContent=all.length;
+  document.getElementById('an-projs').textContent=S.projects.length;
+  document.getElementById('an-avgsk').textContent=(all.length?Math.round(all.reduce((a,s)=>a+s.l,0)/all.length):0)+'%';
+  document.getElementById('an-avgpr').textContent=(ap.length?Math.round(ap.reduce((a,p)=>a+p.pct,0)/ap.length):0)+'%';
+}
+
+/* ===== CHARTS ===== */
+function destroyCharts(){Object.keys(CI).forEach(k=>{if(CI[k]){CI[k].destroy();CI[k]=null;}});}
+function drawCharts(){
+  destroyCharts();
+  updateAnaKPI();
+  const all=[...S.skills.design,...S.skills.tech,...S.skills.soft];
+  const C1='rgba(0,212,255,0.75)',C2='rgba(123,92,255,0.75)',C3='rgba(0,229,160,0.75)',C4='rgba(245,200,66,0.75)',C5='rgba(255,79,106,0.75)';
+
+  // Cat doughnut
+  CI.cat=new Chart(document.getElementById('cCat'),{type:'doughnut',data:{
+    labels:['Design','Tech','Soft Skills'],
+    datasets:[{data:[S.skills.design.length,S.skills.tech.length,S.skills.soft.length],backgroundColor:[C1,C2,C3],borderWidth:0,hoverOffset:4}]
+  },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#6e9ab5',padding:12,font:{size:10}}}}}});
+
+  // Score gauge (avg of skills+progress)
+  const avgSk=all.length?Math.round(all.reduce((a,s)=>a+s.l,0)/all.length):0;
+  const avgPr=S.progress.length?Math.round(S.progress.reduce((a,p)=>a+p.pct,0)/S.progress.length):0;
+  const overall=Math.round((avgSk+avgPr)/2);
+  CI.score=new Chart(document.getElementById('cScore'),{type:'doughnut',data:{
+    labels:['Score','Remaining'],
+    datasets:[{data:[overall,100-overall],backgroundColor:[C1,'rgba(255,255,255,0.04)'],borderWidth:0,circumference:270,rotation:-135}]
+  },options:{responsive:true,maintainAspectRatio:false,cutout:'75%',plugins:{legend:{display:false},tooltip:{callbacks:{label:i=>i.label==='Score'?overall+'% Overall':''}}}},plugins:[{id:'center',beforeDraw(chart){const{ctx,chartArea:{left,top,right,bottom}}=chart;const x=(left+right)/2,y=(top+bottom)/2+20;ctx.save();ctx.font='700 28px Syne, sans-serif';ctx.fillStyle='#00d4ff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(overall+'%',x,y-8);ctx.font='500 11px DM Sans, sans-serif';ctx.fillStyle='#6e9ab5';ctx.fillText('Overall',x,y+18);ctx.restore();}}]});
+
+  // Skills bar
+  const wrap=document.getElementById('cSkillWrap');
+  wrap.style.height=Math.max(200,all.length*38+60)+'px';
+  CI.skill=new Chart(document.getElementById('cSkill'),{type:'bar',data:{
+    labels:all.map(s=>s.n),
+    datasets:[{label:'Level',data:all.map(s=>s.l),backgroundColor:all.map((_,i)=>i%2===0?C1:C2),borderRadius:5,borderSkipped:false}]
+  },options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{max:100,min:0,ticks:{color:'#6e9ab5',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#6e9ab5',font:{size:10}},grid:{display:false}}}}});
+
+  // Progress bar
+  CI.prog=new Chart(document.getElementById('cProg'),{type:'bar',data:{
+    labels:S.progress.map(p=>p.t),
+    datasets:[{label:'Progress',data:S.progress.map(p=>p.pct),backgroundColor:S.progress.map((_,i)=>[C3,C1,C4,C2,C5][i%5]),borderRadius:5,borderSkipped:false}]
+  },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{max:100,min:0,ticks:{color:'#6e9ab5'},grid:{color:'rgba(255,255,255,0.04)'}},x:{ticks:{color:'#6e9ab5',font:{size:10},maxRotation:30},grid:{display:false}}}}});
+
+  // Status doughnut
+  const on=S.progress.filter(p=>p.status==='ongoing').length;
+  const pl=S.progress.filter(p=>p.status==='plan').length;
+  const dn=S.progress.filter(p=>p.status==='done').length;
+  CI.status=new Chart(document.getElementById('cStatus'),{type:'doughnut',data:{
+    labels:['Berjalan','Rencana','Selesai'],
+    datasets:[{data:[on,pl,dn],backgroundColor:[C3,C4,C1],borderWidth:0,hoverOffset:4}]
+  },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#6e9ab5',padding:10,font:{size:10}}}}}});
+
+  // Radar (top skills)
+  const top=all.slice(0,6);
+  CI.radar=new Chart(document.getElementById('cRadar'),{type:'radar',data:{
+    labels:top.map(s=>s.n),
+    datasets:[{label:'Level',data:top.map(s=>s.l),backgroundColor:'rgba(0,212,255,0.12)',borderColor:'rgba(0,212,255,0.7)',pointBackgroundColor:'rgba(0,212,255,0.9)',pointRadius:3}]
+  },options:{responsive:true,maintainAspectRatio:false,scales:{r:{min:0,max:100,ticks:{display:false,stepSize:25},grid:{color:'rgba(255,255,255,0.07)'},pointLabels:{color:'#6e9ab5',font:{size:9}},angleLines:{color:'rgba(255,255,255,0.06)'}}},plugins:{legend:{display:false}}}});
+}
+
+/* ===== PHOTO UPLOAD ===== */
+function triggerPhotoUpload(){document.getElementById('photo-input').click();}
+function handlePhotoUpload(e){
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{S.meta.photo=ev.target.result;save();renderHero();};
+  r.readAsDataURL(f);
+}
+
+/* ===== MEDIA PREVIEW ===== */
+function previewMedia(inputId,previewId){
+  const f=document.getElementById(inputId).files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    const pv=document.getElementById(previewId);
+    pv.style.display='flex';pv.innerHTML='';
+    if(f.type.startsWith('video')){
+      const v=document.createElement('video');v.src=ev.target.result;v.controls=true;v.style.maxWidth='100%';v.style.maxHeight='120px';pv.appendChild(v);
+    }else{
+      const img=document.createElement('img');img.src=ev.target.result;img.style.maxWidth='100%';img.style.maxHeight='120px';pv.appendChild(img);
+    }
+  };r.readAsDataURL(f);
+}
+
+function getMediaData(inputId){
+  const f=document.getElementById(inputId).files[0];
+  if(!f)return{media:'',mtype:''};
+  return new Promise(res=>{
+    const r=new FileReader();
+    r.onload=ev=>res({media:ev.target.result,mtype:f.type.startsWith('video')?'video':'image'});
+    r.readAsDataURL(f);
+  });
+}
+
+/* ===== OPEN MEDIA FULLSCREEN ===== */
+function openMediaFull(src,type){
+  if(!src)return;
+  const ov=document.createElement('div');
+  ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:900;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:1rem';
+  if(type==='video'){
+    const v=document.createElement('video');v.src=src;v.controls=true;v.autoplay=true;v.style.cssText='max-width:90%;max-height:90vh;border-radius:12px';ov.appendChild(v);
+  }else{
+    const img=document.createElement('img');img.src=src;img.style.cssText='max-width:90%;max-height:90vh;border-radius:12px;object-fit:contain';ov.appendChild(img);
+  }
+  ov.addEventListener('click',e=>{if(e.target===ov)document.body.removeChild(ov);});
+  document.body.appendChild(ov);
+}
+
+/* ===== ADD FUNCTIONS ===== */
+function addSkill(){
+  const n=document.getElementById('ms-name').value.trim();if(!n)return;
+  S.skills[document.getElementById('ms-cat').value].push({n,l:parseInt(document.getElementById('ms-lv').value)});
+  save();renderSkills();updateAnaKPI();closeM('mAddSkill');
+  document.getElementById('ms-name').value='';
+}
+
+async function addProject(){
+  const t=document.getElementById('mp-title').value.trim();if(!t)return;
+  const md=await getMediaData('mp-file');
+  S.projects.push({t,d:document.getElementById('mp-desc').value,tags:document.getElementById('mp-tags').value.split(',').map(x=>x.trim()).filter(Boolean),link:document.getElementById('mp-link').value,media:md.media,mtype:md.mtype,icon:document.getElementById('mp-icon').value||'🌐'});
+  save();renderProjects();updateAnaKPI();closeM('mAddProj');
+  ['mp-title','mp-desc','mp-tags','mp-link'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('mp-prev').style.display='none';document.getElementById('mp-file').value='';
+}
+
+function addEdu(){
+  const n=document.getElementById('me-name').value.trim();if(!n)return;
+  S.education.push({lv:document.getElementById('me-lv').value,n,m:document.getElementById('me-major').value,loc:document.getElementById('me-loc').value,y:document.getElementById('me-year').value});
+  save();renderEdu();closeM('mAddEdu');
+  ['me-name','me-major','me-loc','me-year'].forEach(id=>document.getElementById(id).value='');
+}
+
+async function addProgress(){
+  const t=document.getElementById('mpr-title').value.trim();if(!t)return;
+  const md=await getMediaData('mpr-file');
+  S.progress.push({t,s:document.getElementById('mpr-sub').value,pct:0,status:document.getElementById('mpr-status').value,link:document.getElementById('mpr-link').value,media:md.media,mtype:md.mtype});
+  save();renderProg();updateAnaKPI();closeM('mAddProg');
+  ['mpr-title','mpr-sub','mpr-link'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('mpr-prev').style.display='none';document.getElementById('mpr-file').value='';
+}
+
+/* ===== DELETE ===== */
+function delSkill(cat,i){if(!confirm('Hapus skill ini?'))return;S.skills[cat].splice(i,1);save();renderSkills();updateAnaKPI();}
+function delProj(i){if(!confirm('Hapus project ini?'))return;S.projects.splice(i,1);save();renderProjects();updateAnaKPI();}
+function delEdu(i){if(!confirm('Hapus pendidikan ini?'))return;S.education.splice(i,1);save();renderEdu();}
+function delProg(i){if(!confirm('Hapus progress ini?'))return;S.progress.splice(i,1);save();renderProg();updateAnaKPI();}
+
+/* ===== SETTINGS ===== */
+function fillSettings(){
+  const m=S.meta;
+  document.getElementById('set-name').value=m.name;
+  document.getElementById('set-role').value=m.role;
+  document.getElementById('set-badge').value=m.badge;
+  document.getElementById('set-bio').value=m.bio;
+  document.getElementById('set-wa').value=m.wa;
+  document.getElementById('set-ig').value=m.ig;
+  document.getElementById('set-li').value=m.li;
+  document.getElementById('set-proj').value=m.proj;
+  document.getElementById('set-exp').value=m.exp;
+  document.getElementById('set-cli').value=m.cli;
+}
+
+function saveSettings(){
+  S.meta.name=document.getElementById('set-name').value;
+  S.meta.role=document.getElementById('set-role').value;
+  S.meta.badge=document.getElementById('set-badge').value;
+  S.meta.bio=document.getElementById('set-bio').value;
+  S.meta.wa=document.getElementById('set-wa').value;
+  S.meta.ig=document.getElementById('set-ig').value;
+  S.meta.li=document.getElementById('set-li').value;
+  S.meta.proj=parseInt(document.getElementById('set-proj').value)||0;
+  S.meta.exp=parseInt(document.getElementById('set-exp').value)||0;
+  S.meta.cli=parseInt(document.getElementById('set-cli').value)||0;
+  save();renderHero();toast();
+}
+
+/* ===== MODAL HELPERS ===== */
+function openM(id){document.getElementById(id).classList.add('open');}
+function closeM(id){document.getElementById(id).classList.remove('open');}
+function openExport(){openM('mExport');}
+document.querySelectorAll('.overlay').forEach(o=>{o.addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});});
+
+/* ===== EXPORT ===== */
+function doExportJSON(){
+  const b=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='saidabdulaziz_portfolio.json';a.click();toast();
+}
+
+function doExportHTML(){
+  // Simple clean HTML export with embedded data
+  const html=`<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>${S.meta.name} — Portfolio</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:system-ui,sans-serif;background:#04080f;color:#dff0f7;padding:2rem;max-width:840px;margin:0 auto}
+h1{font-size:2.2rem;font-weight:800;color:#00d4ff;margin-bottom:0.3rem}
+h2{font-size:1.2rem;font-weight:700;margin:2rem 0 1rem;border-bottom:1px solid #122338;padding-bottom:0.5rem;color:#dff0f7}
+p{color:#6e9ab5;margin-bottom:1rem;line-height:1.75}
+.badge{display:inline-block;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:100px;padding:0.25rem 0.85rem;font-size:0.75rem;color:#00d4ff;margin-bottom:1rem}
+.ctcs{display:flex;gap:0.75rem;flex-wrap:wrap;margin:1.25rem 0}
+.ctc{padding:0.4rem 0.9rem;border-radius:8px;font-size:0.82rem;text-decoration:none;border:1px solid}
+.wa{color:#00e5a0;border-color:rgba(0,229,160,0.3)}.ig{color:#f5c842;border-color:rgba(245,200,66,0.3)}.li{color:#00d4ff;border-color:rgba(0,212,255,0.3)}
+.skill{margin-bottom:0.75rem}.sk-row{display:flex;justify-content:space-between;margin-bottom:4px;font-size:0.85rem}
+.track{height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#7b5cff,#00d4ff);border-radius:3px}
+.card{background:#081525;border:1px solid #122338;border-radius:12px;padding:1rem;margin-bottom:0.75rem}
+.tag{display:inline-block;font-size:0.68rem;padding:0.15rem 0.5rem;border-radius:4px;background:rgba(123,92,255,0.12);color:#a58fff;margin-right:0.35rem;border:1px solid rgba(123,92,255,0.2)}
+.lvl{font-size:0.68rem;color:#00d4ff;font-weight:600;text-transform:uppercase;letter-spacing:0.07em}
+.prog-n{font-size:1.6rem;font-weight:800;color:#00d4ff;font-family:system-ui}
+footer{margin-top:3rem;text-align:center;font-size:0.72rem;color:#334f68}
+img.portrait{width:130px;height:160px;border-radius:16px;object-fit:cover;float:right;margin-left:1.5rem;border:2px solid #122338}
+</style></head><body>
+${S.meta.photo?`<img class="portrait" src="${S.meta.photo}" alt="${S.meta.name}">`:''}
+<span class="badge">${S.meta.badge}</span>
+<h1>${S.meta.name}</h1>
+<p style="color:#6e9ab5;margin-bottom:0.5rem">${S.meta.role}</p>
+<p>${S.meta.bio}</p>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;max-width:400px;margin-bottom:1.5rem">
+  <div class="card" style="text-align:center"><div class="prog-n">${S.meta.proj}</div><div style="font-size:0.68rem;color:#334f68">Projects</div></div>
+  <div class="card" style="text-align:center"><div class="prog-n">${S.meta.exp}</div><div style="font-size:0.68rem;color:#334f68">Years Exp</div></div>
+  <div class="card" style="text-align:center"><div class="prog-n">${S.meta.cli}</div><div style="font-size:0.68rem;color:#334f68">Clients</div></div>
+</div>
+<div class="ctcs">
+  <a class="ctc wa" href="https://wa.me/${S.meta.wa}" target="_blank">📱 WhatsApp</a>
+  <a class="ctc ig" href="${S.meta.ig}" target="_blank">📸 Instagram</a>
+  <a class="ctc li" href="${S.meta.li}" target="_blank">💼 LinkedIn</a>
+</div>
+<h2>Skills</h2>
+${[...S.skills.design,...S.skills.tech,...S.skills.soft].map(s=>`<div class="skill"><div class="sk-row"><span>${s.n}</span><span style="color:#00d4ff">${s.l}%</span></div><div class="track"><div class="fill" style="width:${s.l}%"></div></div></div>`).join('')}
+<h2>Projects</h2>
+${S.projects.map(p=>`<div class="card">${p.media&&p.mtype!=='video'?`<img src="${p.media}" style="width:100%;height:120px;object-fit:cover;border-radius:8px;margin-bottom:0.75rem">`:''}
+<div style="margin-bottom:0.4rem">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+<div style="font-weight:500;margin-bottom:0.25rem">${p.icon||'🌐'} ${p.t}</div><div style="font-size:0.8rem;color:#6e9ab5">${p.d}</div>
+${p.link?`<a href="${p.link}" target="_blank" style="font-size:0.78rem;color:#00d4ff;text-decoration:none;display:inline-block;margin-top:0.5rem">🔗 Lihat Project</a>`:''}</div>`).join('')}
+<h2>Pendidikan</h2>
+${S.education.map(e=>`<div class="card"><div class="lvl">${e.lv}</div><div style="font-weight:500">${e.n}</div>${e.m?`<div style="font-size:0.8rem;color:#6e9ab5">${e.m}</div>`:''} ${e.loc?`<div style="font-size:0.75rem;color:#334f68">📍 ${e.loc}</div>`:''}</div>`).join('')}
+<h2>Progress</h2>
+${S.progress.map(p=>`<div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:0.5rem"><div><div style="font-weight:500">${p.t}</div><div style="font-size:0.75rem;color:#334f68">${p.s}</div></div><div class="prog-n" style="font-size:1.3rem">${p.pct}%</div></div><div class="track"><div class="fill" style="width:${p.pct}%"></div></div>${p.link?`<a href="${p.link}" target="_blank" style="font-size:0.75rem;color:#00d4ff;text-decoration:none;display:inline-block;margin-top:0.5rem">🔗 Tautan</a>`:''}</div>`).join('')}
+<footer>© ${new Date().getFullYear()} ${S.meta.name} — Portfolio</footer>
+</body></html>`;
+  const b=new Blob([html],{type:'text/html'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='saidabdulaziz_portfolio.html';a.click();
+  closeM('mExport');toast();
+}
+
+/* ===== INIT ===== */
+(async () => {
+  await load();
+  renderAll();
+})();
+</script>
+</body>
+</html>
