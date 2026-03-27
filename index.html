@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <script>
 const supabaseUrl = "https://gsprdnjgbjbhbrrgzemg.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdzcHJkbmpnYmpiaGJycmd6ZW1nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1NzU2NTEsImV4cCI6MjA5MDE1MTY1MX0.qTaygxRmIzWszhiV3Nhe-NpInLeQTM4bd_OGqA-XRYw";
+const supabaseKey = "YOUR_PUBLIC_ANON_KEY"
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 </script>
 <style>
@@ -243,13 +243,10 @@ nav{position:sticky;top:0;z-index:200;background:rgba(4,8,15,0.88);backdrop-filt
     <button onclick="goSec('settings')">⚙ Settings</button>
    <button onclick="goSec('experience')">Experience</button>
   </div>
-  <div class="nav-right">
-    <button class="btn-sm btn-edit-nav" onclick="openExport()">⬇ Export</button>
-  </div>
 </nav>
  
  <!-- ===== HOME ===== -->
-<div id="sec-home" class="section active">
+<div id="sec-home" class="section active"></div>
 <section id="home">
   <h1>Hello, I'm Said Abdul Aziz</h1>
   <p>
@@ -263,7 +260,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(4,8,15,0.88);backdrop-filt
 </div>
 
 <!-- ===== EXPERIENCE ===== -->
-<div id="sec-experience" class="section">
+<div id="sec-experience" class="section"></div>
   <div class="sec-title">Experience & Achievement</div>
 
   <div class="card">
@@ -271,7 +268,6 @@ nav{position:sticky;top:0;z-index:200;background:rgba(4,8,15,0.88);backdrop-filt
     <div style="font-size:0.8rem;color:var(--text2)">
       Designing UI applications and websites for personal projects and small clients.
     </div>
-  </div>
 
   <div class="card">
     <div style="font-weight:500">Self Learning Web Development</div>
